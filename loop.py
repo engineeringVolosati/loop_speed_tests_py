@@ -2,7 +2,7 @@ import random, ctypes
 import numpy as np
 from time import perf_counter
 
-numb = np.uint32(10_000_000)
+numb = 10_000_000
 
 #==============================================================================
 # Сравним суммирование проходов по списку и использование функций sum и range
@@ -109,7 +109,7 @@ def np_sum():
 testlib = ctypes.CDLL("./loop.dll")
 
 def loop_dll():
-    print(testlib.loop(int(numb)))
+    print(ctypes.c_uint32(testlib.loop(numb)))
 
 
 if __name__ == "__main__":
@@ -173,18 +173,28 @@ if __name__ == "__main__":
 
     print("Сравнение стандартных CPython функций и NumPy")
 
+    print('\nВАЖНО!\n numpy воспринимает int именно как int (-2,147,483,648 to 2,147,483,647)')
+    print('поэтому для корректного сравнения результатов преобразовываем в')
+    print('NumPy - numb = np.uint64(numb)\nи\nC - numb = ctypes.c_uint64(numb)\n')
+
     start = perf_counter()
     sum_range()
     print(f"sum_range time: {(perf_counter() - start):.02f}")
 
+    np_numb = np.uint64(numb)
+    c_numb = ctypes.c_uint64(numb)
+    _ = numb
+
+    numb = np_numb
     start = perf_counter()
     np_sum()
     print(f"np_sum time: {(perf_counter() - start):.02f}")
 
-    input("\nENTER to continue\n")
-
-    print("Собственная реализация на чистом C")
-
+    numb = c_numb
     start = perf_counter()
     loop_dll()
     print(f"loop_dll time: {(perf_counter() - start):.02f}")
+    print("И вот тут выскочил трабл с dll.\n"\
+        "Python воспринимает возвращаемое значение как int.")
+    print("Сейчас не важно, потом можно будет подсмотреть в\n"\
+        "исходниках CPython, если вдруг понадобится")
