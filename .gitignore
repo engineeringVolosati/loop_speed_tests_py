@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.gitignore
+sandbox.py
+loop_speed.zip
+.vscode/
 
 # C extensions
 *.so
