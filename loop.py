@@ -119,15 +119,15 @@ if __name__ == "__main__":
         input("\x1b[35m\nENTER to continue\n\x1b[36m")
     start = perf_counter()
     cycle_example_fact()
-    print(f"cycle_example_fact time: {(perf_counter() - start):.02f}")
+    print(f"cycle_example_fact time: {(perf_counter() - start):.03f}")
 
     start = perf_counter()
     sum_example_fact()
-    print(f"sum_example_fact time: {(perf_counter() - start):.02f}")
+    print(f"sum_example_fact time: {(perf_counter() - start):.03f}")
 
     start = perf_counter()
     sum_range_fact()
-    print(f"sum_range_fact time: {(perf_counter() - start):.02f}")
+    print(f"sum_range_fact time: {(perf_counter() - start):.03f}")
 
     wait()
 
@@ -135,11 +135,11 @@ if __name__ == "__main__":
 
     start = perf_counter()
     enumerate_example()
-    print(f"enumerate_example time: {(perf_counter() - start):.02f}")
+    print(f"enumerate_example time: {(perf_counter() - start):.03f}")
 
     start = perf_counter()
     index_access()
-    print(f"index_access time: {(perf_counter() - start):.02f}")
+    print(f"index_access time: {(perf_counter() - start):.03f}")
 
     wait()
 
@@ -147,11 +147,11 @@ if __name__ == "__main__":
 
     start = perf_counter()
     idx_example()
-    print(f"idx_example time: {(perf_counter() - start):.02f}")
+    print(f"idx_example time: {(perf_counter() - start):.03f}")
 
     start = perf_counter()
     zip_example()
-    print(f"zip_example time: {(perf_counter() - start):.02f}")
+    print(f"zip_example time: {(perf_counter() - start):.03f}")
 
     wait()
 
@@ -161,15 +161,15 @@ if __name__ == "__main__":
 
     start = perf_counter()
     list_example()
-    print(f"list_example time: {(perf_counter() - start):.02f}")
+    print(f"list_example time: {(perf_counter() - start):.03f}")
 
     start = perf_counter()
     generator_example()
-    print(f"generator_example time: {(perf_counter() - start):.02f}")
+    print(f"generator_example time: {(perf_counter() - start):.03f}")
 
     start = perf_counter()
     cycle_example()
-    print(f"cycle_example time: {(perf_counter() - start):.02f}")
+    print(f"cycle_example time: {(perf_counter() - start):.03f}")
 
     wait()
 
@@ -187,7 +187,7 @@ if __name__ == "__main__":
 
     start = perf_counter()
     sum_range()
-    print(f"sum_range time: {(perf_counter() - start):.02f}")
+    print(f"sum_range time: {(perf_counter() - start):.03f}")
 
     np_numb = np.uint64(numb)
     c_numb = ctypes.c_uint64(numb)
@@ -196,12 +196,12 @@ if __name__ == "__main__":
     numb = np_numb
     start = perf_counter()
     np_sum()
-    print(f"np_sum time: {(perf_counter() - start):.02f}")
+    print(f"np_sum time: {(perf_counter() - start):.03f}")
 
     numb = _numb
     start = perf_counter()
     loop_dll()
-    print(f"loop_dll time: {(perf_counter() - start):.02f}")
+    print(f"loop_dll time: {(perf_counter() - start):.03f}")
     print("\x1b[3;93m\n"\
         "И вот тут выскочил трабл с loop.dll.\n"\
         "В loop.c явно прописан uint64_t, но принимает отрицательные\n"\
