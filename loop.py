@@ -173,9 +173,10 @@ if __name__ == "__main__":
 
     print("Сравнение стандартных CPython функций и NumPy")
 
-    print('\nВАЖНО!\n numpy воспринимает int именно как int (-2,147,483,648 to 2,147,483,647)')
-    print('поэтому для корректного сравнения результатов преобразовываем в')
-    print('NumPy - numb = np.uint64(numb)\nи\nC - numb = ctypes.c_uint64(numb)\n')
+    print('\nВАЖНО!\n numpy воспринимает int именно как int\n'\
+        'from -2,147,483,648 to 2,147,483,647 )\n'\
+        'поэтому для корректного сравнения результатов преобразовываем в\n\n'\
+        'NumPy - numb = np.uint64(numb)\nи\nC - numb = ctypes.c_uint64(numb)\n')
 
     start = perf_counter()
     sum_range()
