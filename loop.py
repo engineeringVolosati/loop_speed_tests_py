@@ -107,7 +107,13 @@ def np_sum():
 testlib = ctypes.CDLL("./loop.dll")
 
 def loop_dll():
-    print(testlib.loop(numb))
+    # Не получается вернуть результат из dll как uint64
+    # По этому печатаю результат внутри dll
+    testlib.loop(numb)
+
+def test64():
+    print('\n')
+    print(testlib.test64(numb))
 
 
 if __name__ == "__main__":
@@ -116,7 +122,8 @@ if __name__ == "__main__":
         "использование функций sum и range")
 
     def wait():
-        input("\x1b[35m\nENTER to continue\n\x1b[36m")
+        # input("\x1b[35m\nENTER to continue\n\x1b[36m")
+        pass
     start = perf_counter()
     cycle_example_fact()
     print(f"cycle_example_fact time: {(perf_counter() - start):.03f}")
@@ -180,10 +187,14 @@ if __name__ == "__main__":
             '\033[4m'\
         'from -2,147,483,648 to 2,147,483,647\n'\
             '\033[0m\x1b[3;93m'\
-        'поэтому для корректного сравнения результатов преобразовываем в\n\n'\
+        'и обрабатывает внутренний цикл так же. соответственно, если\n'\
+        'производить суммирование больших чисел, то результат будет\n'\
+        'неверным. Поскольку переполнение приводитнас к отрицательному\n'\
+        'числу, то результат будет неверным.\n'\
+        'Поэтому для корректного сравнения результатов преобразовываем в\n\n'\
         'NumPy base_64: numb = np.uint64(numb)\n'\
             '\x1b[0m\n\x1b[36m')
-    sleep(3)
+    sleep(0.1)
 
     start = perf_counter()
     sum_range()
@@ -201,10 +212,10 @@ if __name__ == "__main__":
     numb = _numb
     start = perf_counter()
     loop_dll()
-    print(f"loop_dll time: {(perf_counter() - start):.03f}")
-    print("\x1b[3;93m\n"\
-        "И вот тут выскочил трабл с loop.dll.\n"\
-        "В loop.c явно прописан uint64_t, но принимает отрицательные\n"\
-        "значения при оверлоаде как обычный int - int32_t..."\
-        "Сейчас не важно, потом можно будет подсмотреть"\
-            "\x1b[0m")
+    print(f"\nloop_dll time: {(perf_counter() - start):.03f}"\
+        "\x1b[0m")
+
+    start = perf_counter()
+    test64()
+    print(f"\n__uint_64__ time: {(perf_counter() - start):.03f}")
+
